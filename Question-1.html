@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 1:</title>
+</head>
+<body>
+    <!-- Heading -->
+    <h2>Original Array </h2>
+    <p id="original_input"></p>
+    <h3>Output:</h3>
+
+<script>
+    // Input Array
+const input = [2, 4, 6, 8, 10];
+document.getElementById("original_input").innerText = input;  
+
+// Sorting Array
+input.sort(function(a, b){return b - a});
+let n= input.length;
+
+// Dividing Array into two
+const array= input.splice((input.length+1)/2, input.length)
+console.log(array);
+console.log(input);
+
+// Length of both Array
+let l1= input.length;
+let l2= array.length;
+
+// Reversing the 2nd array(Splice Array)
+array.reverse();
+console.log(array);
+
+// Function to create require output:-
+function merge(input, array, l1,l2, Output)
+{
+    let i = 0, j = 0, k = 0;
+
+    // for even no of array
+    while (i<l1 && j <l2)
+    {
+        Output[k++] = input[i++];
+        Output[k++] = array[j++];
+    }
+    // for odd no of array
+    while (i < l1)
+        Output[k++] = input[i++];
+}
+
+// Output
+let Output = Array(l1+l2);
+    merge(input, array, l1, l2, Output);
+ 
+    for (let i=0; i < l1+l2; i++)
+        document.write(Output[i] + ", ");
+
+</script>
+</body>
+</html>

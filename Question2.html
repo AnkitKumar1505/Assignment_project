@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question 2:</title>
+    <style>
+        ul{
+            list-style-type: none;
+        }
+        li{
+            padding: 10px 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: blue;
+            width: fit-content;
+        }
+        li:hover{
+            color: red;
+            cursor: pointer;
+            transition: all ease .5s;
+        }
+        table{
+            border-collapse: collapse ;
+            cursor: pointer;
+        }
+        th{
+            background-color: grey;
+            padding: 15px 25px;
+            font-size: large;
+        }
+        td{
+            background-color: aquamarine;
+            padding: 10px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Menu:-</h1>
+        <table>
+            <tr>
+                <th>Product/Add-on</th>
+                <th>Milk</th>
+                <th>Cream</th>
+                <th>Latte</th>
+            </tr>
+
+            <tr>
+                <th>Espresso</th>
+                <td>60</td>
+                <td>75</td>
+                <td>100</td>
+            </tr>
+            <tr>
+                <th>Cappuccino</th>
+                <td>80</td>
+                <td>90</td>
+                <td>125</td>
+            </tr>
+            <tr>
+                <th>Latte</th>
+                <td>100</td>
+                <td>125</td>
+                <td>150</td>
+            </tr>
+        </table>
+        <h2>Click here to see Total bill:-</h2>
+        <div class="products">
+            <ul>
+                <li id="Espresso" onclick="espresso()">Total bill for Espresso <p id="espresso"></p></li>
+                <!-- <li id="Cappuccino" onclick="Cappuccino()">Total bill for Cappuccino <p id="Cappuccino"></p></li> -->
+                <!-- <li id="Latte" onclick="Latte()">Total bill for Latte <p id="Latte"></p></li> -->
+            </ul>
+        </div>
+
+    </div>
+
+    <script>
+         class CoffeeShop {
+  constructor() {
+    // type of products with add-ons
+    this.products = {
+      espresso: { milk: 60, cream: 75, latte: 100 },
+      cappuccino: { milk: 80, cream: 90, latte: 125 },
+      latte: { milk: 100, cream: 125, latte: 150 },
+    };
+    // available orders
+    this.orderList = [
+      'Espresso with Milk',
+      'Espresso with Cream',
+      'Espresso with Latte',
+      'Cappuccino with Milk',
+      'Cappuccino with Cream',
+      'Cappuccino with Latte',
+      'Latte with Milk',
+      'Latte with Cream',
+      'Latte with Latte',
+    ];
+    // customer orders
+    this.orders = [];
+  }
+
+  // get the list of order
+  getOrderList() {
+    return this.orderList;
+  }
+
+  // place order single or multiple times
+  placeOrder(currOrder) {
+    let isOrderExist = false;
+
+    // No of addons
+    this.orders.forEach((order) => {
+      if (currOrder in order) {
+        isOrderExist = true;
+        order[currOrder] += j;
+        return;
+      }
+    });
+    let j= prompt("No of Order")
+    let i= prompt("No of Addons for milk, cream, latte")
+
+    // No of orders
+    if (!isOrderExist) {
+      let payload = {
+        [currOrder]: i,
+      };
+      this.orders.push(payload);
+    }
+
+    return 'Order successfully placed';
+  }
+
+  // get bill for the customer
+  generateBill() {
+    let total = 0;
+    let billTemplate = '** Welcome to CoffeeShop **\n';
+
+    this.orders.forEach((order) => {
+      let currentItemTotal = 0;
+      let orderKey = Object.keys(order)[0];
+      let orderQuantity = order[orderKey];
+
+      let orderName = orderKey.split(' ');
+      let product = orderName[0].toLowerCase();
+      let addOn = orderName[2].toLowerCase();
+
+      currentItemTotal = this.products[product][addOn] * orderQuantity;
+      billTemplate += `   ${orderKey} *${orderQuantity}     ${currentItemTotal}\n`;
+      total = total + currentItemTotal;
+    });
+
+    return `${billTemplate}    Item Total             ${total}`;
+  }
+}
+
+
+
+// instantiate the class
+const coffeeShop = new CoffeeShop();
+
+function espresso(){
+    
+    document.getElementById("espresso").innerText =coffeeShop.generateBill();
+}
+
+// For Espresso
+console.log(coffeeShop.placeOrder('Espresso with Milk'));
+console.log(coffeeShop.placeOrder('Espresso with Cream'));
+console.log(coffeeShop.placeOrder('Espresso with Latte'));
+
+// For Cappuccino
+// console.log(coffeeShop.placeOrder('Cappuccino with Milk'));
+// console.log(coffeeShop.placeOrder('Cappuccino with Cream'));
+// console.log(coffeeShop.placeOrder('Cappuccino with Latte'));
+
+// For Latte
+// console.log(coffeeShop.placeOrder('Latte with Milk'));
+// console.log(coffeeShop.placeOrder('Latte with Cream'));
+// console.log(coffeeShop.placeOrder('Latte with Latte'));
+
+// Generate the detailed bill with the amount to be paid
+console.log(coffeeShop.generateBill());
+    </script>
+</body>
+</html>
